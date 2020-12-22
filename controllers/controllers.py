@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# from odoo import http
+from odoo import http
 
 
-# class Bookstore(http.Controller):
-#     @http.route('/bookstore/bookstore/', auth='public')
-#     def index(self, **kw):
-#         return "Hello, world"
+class Bookstore(http.Controller):
+    @http.route('/bookstore/bookstore/', auth='public')
+    def index(self, **kw):
+        return "Hello, world"
 
 #     @http.route('/bookstore/bookstore/objects/', auth='public')
 #     def list(self, **kw):

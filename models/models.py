@@ -38,29 +38,19 @@ class Book(models.Model):
     _name = 'bookstore.book'
     _description = "Book item which is written by Authors and may be listed by multiple (up to 3) existing Categories"
 
-    title = fields.Char(required=True)
-    year = fields.Integer(required=True)
-    author_ids = fields.Char(required=True, default="m2m")
-    category_ids = fields.Char(required=True, default="m2m")
-    publisher_id = fields.Char(required=True, default="m2o")
+    title = fields.Char(required=True, string="Book title")
+    year = fields.Integer(required=True, string="Year")
+    author_ids = fields.Char(required=True, string="Authors", default="m2m")
+    category_ids = fields.Char(required=True, string="Categories", default="m2m")
+    publisher_id = fields.Char(required=True, string="Publisher", default="m2o")
+    in_stock = fields.Integer(required=True, string="Stock")
 
 
+class RentalRecord(models.Model):
+    _name = 'bookstore.rental_record'
+    _description = "Holds information about rental operations. Rent can be performed by one user on one book."
 
-
-
-
-
-
-# class bookstore(models.Model):
-#     _name = 'bookstore.bookstore'
-#     _description = 'bookstore.bookstore'
-
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
+    taker_id = fields.Char()
+    book_id = fields.Char()
+    taken_date = fields.Date()
+    returned_date = fields.Date()
