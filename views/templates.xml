@@ -1,31 +1,103 @@
 <odoo>
     <data>
-
-        <template id="index">
-            <h1>Welcome to our bookstore!</h1>
-            <a t-attf-href="#{ root }/books/">
-                <h3>Browse Books</h3>
-            </a>
-        </template>
-
-        <template id="listing">
-            <ul>
-                <li t-foreach="objects" t-as="object">
-                    <a t-attf-href="#{ root }/books/#{ object.id }">
-                        <t t-esc="object.display_name"/>
-                    </a>
-                </li>
-            </ul>
-        </template>
-
-        <template id="object">
-            <h1><t t-esc="object.display_name"/></h1>
-            <dl>
-                <t t-foreach="object._fields" t-as="field">
-                    <dt><t t-esc="field"/></dt>
-                    <dd><t t-esc="object[field]"/></dd>
+        <template id="index" name="Index">
+            <t t-name="website.index">
+                <t t-call="website.layout">
+                    <div id="wrap" class="oe_structure oe_empty">
+                        <section
+                                class="s_cover parallax s_parallax_is_fixed bg-black-50 pt96 pb96 s_parallax_no_overflow_hidden"
+                                data-scroll-background-ratio="1" data-name="Cover" style="background-image: none;">
+                            <span class="s_parallax_bg oe_img_bg oe_custom_bg"
+                                  style="background-image: url('/web/image/website.s_cover_default_image'); background-position: 50% 0;"/>
+                            <div class="container">
+                                <div class="row s_nb_column_fixed">
+                                    <div class="col-lg-12 s_title" data-name="Title">
+                                        <h1 class="s_title_thin" style="font-size: 62px; text-align: center;">Welcome to
+                                            the Bookstore!</h1>
+                                    </div>
+                                    <div class="s_text pt16 pb16 col-lg-12" data-name="Text">
+                                        <p class="lead" style="text-align: center;">We have the biggest selection of
+                                            best books from authors all around the world.</p>
+                                    </div>
+                                    <div class="col-lg-12 s_btn text-center pt16 pb16" data-name="Buttons">
+                                        <a t-attf-href="#{ root }/books/" class="btn btn-primary rounded-circle">Browse
+                                            Books</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </t>
-            </dl>
+            </t>
+        </template>
+
+        <template id="listing" name="Books">
+            <t t-name="website.books">
+                <t t-call="website.layout">
+                    <div id="wrap" class="oe_structure oe_empty">
+                        <section class="pt32 pb32" data-name="Title">
+                            <div class="container">
+                                <div class="row s_nb_column_fixed">
+                                    <div class="col-lg-12 s_title pt16 pb16" style="text-align: center;">
+                                        <h1 class="s_title_default">
+                                            <font style="font-size: 62px;" class="o_default_snippet_text">Book List</font>
+                                        </h1>
+                                    </div>
+                                    <div t-foreach="objects" t-as="object">
+                                        <div class="s_card card bg-white w-100" data-name="Card">
+                                            <h4 class="card-header o_default_snippet_text"><t
+                                                    t-esc="object.title"/></h4>
+                                            <div class="card-body">
+                                                <p class="card-text o_default_snippet_text">Authors: <t
+                                                        t-esc="object.author_ids"/></p>
+                                                <div class="col-lg-3 s_btn text-right pt8 pb24">
+                                                    <a t-attf-href="#{ root }/books/#{ object.id }"
+                                                       class="btn btn-primary btn-lg">
+                                                        <span class="o_default_snippet_text">View</span>
+                                                        <i class="fa fa-1x fa-fw fa-arrow-circle-right ml-1"/>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <template id="object" name="Book">
+            <t t-name="website.book">
+                <t t-call="website.layout">
+                    <div id="wrap" class="oe_structure oe_empty">
+                        <section class="s_call_to_action bg-200 pt48 pb24" data-name="Call to Action">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-9 pb24">
+                                        <div class="s_card card bg-white w-100" data-name="Card">
+                                            <h4 class="card-header o_default_snippet_text"><t
+                                                    t-esc="object.title"/></h4>
+                                            <div class="card-body">
+                                                <p class="card-text o_default_snippet_text">Authors: <t
+                                                        t-esc="object.author_ids"/></p>
+                                                <p class="card-text o_default_snippet_text">Books in stock: <t
+                                                        t-esc="object.in_stock"/></p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <i class="fa fa-1x fa-clock-o mr8"/>
+                                                <small class="o_default_snippet_text"><t
+                                                        t-esc="object.create_date"/></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </t>
+            </t>
         </template>
 
     </data>

@@ -3,20 +3,21 @@ from odoo import http
 
 
 class Bookstore(http.Controller):
-    @http.route('/bookstore/', auth='public')
+    @http.route('/', auth='public', website=True)
     def index(self, **kw):
         return http.request.render('bookstore.index', {
-            'root': '/bookstore',
+            'root': '',
         })
 
-    @http.route('/bookstore/books/', auth='public')
+    @http.route('/books/', auth='public', website=True)
     def list(self, **kw):
+        print("books")
         return http.request.render('bookstore.listing', {
-            'root': '/bookstore',
+            'root': '',
             'objects': http.request.env['bookstore.book'].search([]),
         })
 
-    @http.route('/bookstore/books/<model("bookstore.book"):obj>/', auth='public')
+    @http.route('/books/<model("bookstore.book"):obj>/', auth='public', website=True)
     def object(self, obj, **kw):
         return http.request.render('bookstore.object', {
             'object': obj
